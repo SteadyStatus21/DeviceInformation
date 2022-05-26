@@ -157,18 +157,18 @@
 			    tbl.style.border = '0px solid black';
 
 				for (var i = 0; i < (client_values.length); i++) {
-				 	document.write(client_values[i]);
-				 	document.write("\n\n\n");
-				 	var para = document.createElement("P");
-				 	para.setAttribute("align", "center");
-				    var t = document.createTextNode( client_values_str[i] + ":\t\t");
-				    var t2 = document.createElement("input");
-					t2.setAttribute('type', 'text');
-					t2.setAttribute('value', client_values[i]);
-				    para.appendChild(t);
-				    para.appendChild(t2);
-				    document.body.appendChild(para);
-				    document.write("<br>");
+				 	//document.write(client_values[i]);
+				 	//document.write("\n\n\n");
+				 	//var para = document.createElement("P");
+				 	//para.setAttribute("align", "center");
+				    //var t = document.createTextNode( client_values_str[i] + ":\t\t");
+				    //var t2 = document.createElement("input");
+					//t2.setAttribute('type', 'text');
+					//t2.setAttribute('value', client_values[i]);
+				    //para.appendChild(t);
+				    //para.appendChild(t2);
+				    //document.body.appendChild(para);
+				    //document.write("<br>");
 					
 					var tr = tbl.insertRow();
 					tr.setAttribute('width','100%')
@@ -176,14 +176,14 @@
 	                var td = tr.insertCell();
 	                td.appendChild(document.createTextNode(client_values_str[i]));
 	                td.setAttribute("style", "font-weight:bold; text-align:center");
-	                td.style.border = '1px solid black';
+	                td.style.border = '0px solid black';
 	                td.setAttribute('rowSpan', '1');
 
 
 				   	
 				   	var td2 = tr.insertCell();
 	                td2.appendChild(document.createTextNode(client_values[i]));
-	                td2.style.border = '1px solid black';
+	                td2.style.border = '0px solid black';
 	                td2.setAttribute('rowSpan', '1');
 
 

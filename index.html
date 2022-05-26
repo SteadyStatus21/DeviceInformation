@@ -1,165 +1,199 @@
 <!DOCTYPE html>
-<html lang="en-us" dir="ltr" prefix="og: ">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
-        <link rel="preconnect" href="https://cdn.jsdelivr.net" />
-        <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
-        <title>Device Information | Created by SteadyStatus21</title>
-        <meta name="description" content="Want to see some information about your device? Check your device info here!" />
-        <meta name="keywords" content="device info, device information, device details, browser info, browser information, browser details, what is my browser, site feedback" />
-        <meta property="og:url" content="" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Device Information | Created by SteadyStatus21" />
-        <meta property="og:description" content="Want to see some information about your device? Check your device info here!" />
-        <link rel="icon" href="./assets/favicon/favicon.ico" sizes="any" />
-        <link rel="icon" href="./assets/favicon/favicon.svg" type="image/svg+xml" />
-        <link rel="apple-touch-icon" href="./assets/favicon/apple-touch-icon.png" />
-        <link rel="manifest" href="./assets/favicon/site.webmanifest" />
-        <script src="assets/client.min.js"></script>
-        <style>
-            body {font-family:Helvetica, Arial, sans-serif;line-height:130%;margin:0;padding:0;background:#fafafa;border-top:3px solid #6528c1;}
-            a {color:#6528c1;}
-            a:hover {color:#b182f7;}
-            p {padding:5px 0;margin:0;font-size:0.88rem;}
-            ul {list-style:none;padding:5px 0;margin:0;}
-            ul li {padding:5px 0 10px;margin:0;line-height:150%;}
-            h1, h2, h3, h4 {line-height:120%;padding:5px 0;margin:0;}
-            h1 {background:url(./assets/svg/laptop.svg) no-repeat 0 50%;background-size:30px 30px;line-height:1;padding:0 0 0 45px;margin-bottom:15px;}
-            h2 {padding:0 0 5px;margin:0 0 10px;border-bottom:2px solid #dadada;line-height:120%;}
-            h3 {font-size:0.94rem;font-weight:normal;}
-            button {background:#6528c1;color:#fff;padding:5px 15px;border-radius:5px;border:0;font-size:0.9rem;line-height:150%;cursor:pointer;}
+<html>
+<head>
+	<script src="assets/client.min.js"></script>
+</head>
+<body>
 
-            .container {max-width:1200px;padding:0 15px;margin:0 auto;}
-                header {margin:0;padding:15px;text-align:right;}
-                    header a {display:inline-block;}
-                main {display:grid;grid-template-columns:1fr 3fr;grid-gap:30px;margin:0 0 15px;}
-                    .about {display:grid;grid-template-columns:1fr;grid-template-rows:auto auto 100%;grid-gap:15px;align-items:start;padding:15px;}
-                        .about .info p {font-size:0.8rem;color:#606060;}
-                        .about .copy,
-                        .about .share {padding:15px 0;display:grid;grid-template-columns:1fr;grid-gap:5px;align-items:center;border-top:2px solid #dadada;}
-                    .details {background:#fff;padding:15px;border-radius:10px;box-shadow:0 5px 10px rgba(0,0,0,0.2);}
-                        #device {margin-bottom:15px;}
-                footer {padding:15px;}
-                    footer p {color:#909090;font-size:0.8rem;text-align:center;}
+<h1 align="center"> Fingerprinting data in this browser using Client.js </h1>
+<br>
 
-            @media only screen and (max-width:768px) {
-                ul li b {display:block;}
-                h1 {background:url(./assets/svg/phone.svg) no-repeat 0 50%;background-size:contain;}
-                h2 {font-size:1.4rem;}
-                header {padding:15px 15px 5px;}
-                main {grid-template-columns:1fr;}
-                    .about {grid-template-rows:auto auto auto;grid-gap:0;}
-                        .about .copy p,
-                        .about .share p {padding:0;}
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <header>
-                <a href="https://github.com/SteadyStatus21/">Check out my GitHub!</a>
-            </header>
-            <main>
-                <div class="about">
-                    <div class="info">
-                        <h1>SteadyStatus21's Device Info Detector</h1>
-                        <p>Having trouble identifying some features of your device? No problem! Here they are!</p>
-                    </div>
-                </div>
-                <div class="details">
-                    <h2>Your Device Info</h2>
-                    <div id="device"></div>
-                    <h2>Your IP &amp; Location</h2>
-                    <div id="iplocation"></div>
-                </div>
-            </main>
-            <footer>
-                <p>Last Update: 28/02/2022 (v1.0) - Report issues or suggest improvements on the project's <a rel="noopener" title="Feedback for SteadyStatus21" target="_blank" href="https://github.com/SteadyStatus21/DeviceInformation/issues">GitHub Issues</a>.</p>
-            </footer>
-        </div>
+<script>
 
-            // Get current date & time (as timestamp)
-            var d = new Date();
-            var month = ((d.getMonth() + 1) < 10 ? '0' + (d.getMonth() + 1) : (d.getMonth() + 1));
-            var timestamp = d.getFullYear() + '' + month + '' + d.getDate() + '' + d.getHours() + '' + d.getMinutes() + '' + d.getSeconds();
+				var client = new ClientJS();
+				var client_values = [
+					(client.getFingerprint()),
+					client.getUserAgent(),
+					client.getUserAgentLowerCase(),
+					client.getBrowser(),
+					client.getBrowserVersion(),
+					client.getBrowserMajorVersion(),
 
-            // Check for shareable device info
-            var deviceFromUrl, locationFromUrl;
-            var qs = window.location.search;
-            if (qs.indexOf('?info=') > -1) {
-                var urlParams = new URLSearchParams(qs);
-                deviceFromUrl = JSON.parse(decodeURIComponent(urlParams.get('info')));
-                locationFromUrl = decodeURIComponent(urlParams.get('location'));
-            }
+					client.getScreenPrint(),
+					client.getPlugins(),
+					client.getFonts(),
+					client.isLocalStorage(),
+					client.isSessionStorage(),
+					client.getCanvasPrint(),
+					client.getCPU(),
+					client.isMobile(),
+					client.isIphone(),
+					client.isIpad(),
+					client.isIpod(),
 
-            // Device
-            var parser = new UAParser();
-            var device = parser.getResult();
-            device.screensize = window.screen.width + ' x ' + window.screen.height;
-            device.browsersize = window.innerWidth + ' x ' + window.innerHeight;
-            if (deviceFromUrl) {
-                device = deviceFromUrl;
-            }
-            var deviceDetails = {
-                'Browser Name': device.browser.name,
-                'Browser Version': device.browser.version,
-                'Operating System': device.os.name,
-                'Operating System Version': device.os.version,
-                'Screen Size': device.screensize,
-                'Browser Window Size': device.browsersize,
-                'User Agent': device.ua
-            }
-            var devContainer = document.getElementById('device');
-            var devProps = [];
-            for (var key in deviceDetails) {
-                devProps.push('<li>' + key + ': <b>' + (deviceDetails[key] ? deviceDetails[key].replace(/(<([^>]+)>)/gi, '') : '') + '</b></li>');
-            }
-            devContainer.innerHTML = '<ul>' + devProps.join('') + '</ul>';
+					client.isIE(),
+					client.isChrome(),
+					client.isFirefox(),
+					client.isSafari(),
+					client.isOpera(),
+					client.getEngine(),
+					client.getEngineVersion(),
+					client.getOS(),
+					client.getOSVersion(),
+					client.isWindows(),
+					client.isMac(),
+					client.isLinux(),
+					client.isUbuntu(),
+					client.isSolaris(),
+					client.getDevice(),
+					client.getDeviceType(),
+					client.getDeviceVendor(),
 
-            // IP - Location
-            var ipLocContainer = document.getElementById('iplocation');
-            var ipLocProps = [];
-            if (locationFromUrl) {
-                ipLocProps.push('<li id="location">Location: <b>' + locationFromUrl.replace(/(<([^>]+)>)/gi, '') + '</b></li>');
-                ipLocContainer.innerHTML = '<ul>' + ipLocProps.join('') + '</ul>';
-            } else {
-                fetch('https://ipv4.myip.wtf/json').then(response => response.json()).then(function(data) {
-                    var location = data.YourFuckingLocation.split(',')[0] + ', ' + data.YourFuckingCountryCode;
-                    ipLocProps.push('<li>IP Address: <b>' + data.YourFuckingIPAddress + '</b></li>');
-                    ipLocProps.push('<li>ISP: <b>' + data.YourFuckingISP + '</b></li>');
-                    ipLocProps.push('<li id="location">Location: <b>' + location + '</b></li>');
-                    ipLocContainer.innerHTML = '<ul>' + ipLocProps.join('') + '</ul>';
-                });
-            }
+					client.isMobileMajor(),
+					client.isMobileAndroid(),
+					client.isMobileOpera(),
+					client.isMobileWindows(),
+					client.isMobileBlackBerry(),
+					client.isMobileIOS(),
 
-            // Copy device info
-            document.getElementById('copyInfo').onclick = function(e) {
-                var devInfo = document.getElementById('device');
-                var devInfoAsText = devInfo.innerText || devInfo.textContent;
-                var locInfo = document.getElementById('location');
-                var locInfoAsText = locInfo.innerText || locInfo.textContent;
-                copyToClipboard(devInfoAsText + '\n' + locInfoAsText + '\nDevice Information Source: https://deviceinfo.cc');
-                alert('Your device information is now copied to the clipboard.\n\nYou can paste this information in your message to the site owners you wish to contact and provide feedback.');
-            }
+					client.getColorDepth(),
+					client.getCurrentResolution(),
+					client.getAvailableResolution(),
+					client.getDeviceXDPI(),
+					client.getDeviceYDPI(),
+					client.isJava(),
+					client.getJavaVersion(),
+					client.isFlash(),
+					client.getFlashVersion(),
+					client.isSilverlight(),
+					client.getSilverlightVersion(),
+					client.getMimeTypes(),
+					client.isMimeTypes(),
+					client.isFont(),
 
-            // Copy shareable URL
-            document.getElementById('copyLink').onclick = function(e) {
-                var locInfo = document.getElementById('location').getElementsByTagName('b')[0];
-                var locInfoAsText = locInfo.innerText || locInfo.textContent;
-                var currentUrl = window.location.href;
-                if (currentUrl.indexOf('?') > -1) {
-                    currentUrl = currentUrl.split('?')[0];
-                }
-                var link = currentUrl + '?info=' + encodeURIComponent(JSON.stringify(device)) + '&location=' + encodeURIComponent(locInfoAsText);
-                copyToClipboard(link);
-                alert('Your device information has been copied into a shareable URL.\n\nYou can paste this URL in your message to the site owners you wish to contact and provide feedback.');
-            }
-        </script>
-        <script>
-        const ClientJS = window.ClientJS;
-        const fingerprint = client.getFingerprint();
-        alert(fingerprint);
-        </script>
-    </body>
+					client.isCookie(),
+					client.getTimeZone(),
+					client.getLanguage(),
+					client.getSystemLanguage(),
+					client.isCanvas(),
+					client.getBrowserData()
+				]
+
+				var client_values_str = [
+					"client.getFingerprint()",
+					"client.getUserAgent()",
+					"client.getUserAgentLowerCase()",
+					"client.getBrowser()",
+					"client.getBrowserVersion()",
+					"client.getBrowserMajorVersion()",
+
+					"client.getScreenPrint()",
+					"client.getPlugins()",
+					"client.getFonts()",
+					"client.isLocalStorage()",
+					"client.isSessionStorage()",
+					"client.getCanvasPrint()",
+					"client.getCPU()",
+					"client.isMobile()",
+					"client.isIphone()",
+					"client.isIpad()",
+					"client.isIpod()",
+
+
+
+					"client.isIE()",
+					"client.isChrome()",
+					"client.isFirefox()",
+					"client.isSafari()",
+					"client.isOpera()",
+					"client.getEngine()",
+					"client.getEngineVersion()",
+					"client.getOS()",
+					"client.getOSVersion()",
+					"client.isWindows()",
+					"client.isMac()",
+					"client.isLinux()",
+					"client.isUbuntu()",
+					"client.isSolaris()",
+					"client.getDevice()",
+					"client.getDeviceType()",
+					"client.getDeviceVendor()",
+
+					"client.isMobileMajor()",
+					"client.isMobileAndroid()",
+					"client.isMobileOpera()",
+					"client.isMobileWindows()",
+					"client.isMobileBlackBerry()",
+					"client.isMobileIOS()",
+
+					"client.getColorDepth()",
+					"client.getCurrentResolution()",
+					"client.getAvailableResolution()",
+					"client.getDeviceXDPI()",
+					"client.getDeviceYDPI()",
+					"client.isJava()",
+					"client.getJavaVersion()",
+					"client.isFlash()",
+					"client.getFlashVersion()",
+					"client.isSilverlight()",
+					"client.getSilverlightVersion()",
+					"client.getMimeTypes()",
+					"client.isMimeTypes()",
+					"client.isFont()",
+
+					"client.isCookie()",
+					"client.getTimeZone()",
+					"client.getLanguage()",
+					"client.getSystemLanguage()",
+					"client.isCanvas()",
+					"client.getBrowserData()"
+				]
+
+
+
+				var body = document.body
+				var tbl  = document.createElement('table');
+			    tbl.style.width  = '200%';
+			    tbl.style.border = '1px solid black';
+
+				for (var i = 0; i < (client_values.length); i++) {
+				 	// document.write(client_values[i]);
+				 	// document.write("\n\n\n");
+				 	//var para = document.createElement("P");
+				 	//para.setAttribute("align", "center");
+				    //var t = document.createTextNode( client_values_str[i] + ":\t\t");
+				    //var t2 = document.createElement("input");
+					//t2.setAttribute('type', 'text');
+					//t2.setAttribute('value', client_values[i]);
+				    //para.appendChild(t);
+				    //para.appendChild(t2);
+				    //document.body.appendChild(para);
+				    //document.write("<br>");
+					
+					var tr = tbl.insertRow();
+					tr.setAttribute('width','100%')
+
+	                var td = tr.insertCell();
+	                td.appendChild(document.createTextNode(client_values_str[i]));
+	                td.setAttribute("style", "font-weight:bold; text-align:center");
+	                td.style.border = '1px solid black';
+	                td.setAttribute('rowSpan', '1');
+
+
+				   	
+				   	var td2 = tr.insertCell();
+	                td2.appendChild(document.createTextNode(client_values[i]));
+	                td2.style.border = '1px solid black';
+	                td2.setAttribute('rowSpan', '1');
+
+
+				}   
+
+
+			    body.appendChild(tbl);
+			
+
+</script>
+
+</body>
 </html>

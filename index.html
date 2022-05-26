@@ -8,7 +8,29 @@
 		body{
 			font-family: "Roboto Condensed";
 		}
-	</style>
+		#tb1 {
+	  font-family: Arial, Helvetica, sans-serif;
+	  border-collapse: collapse;
+	  width: 100%;
+	}
+	
+	#tb1 td, #tb1 th {
+	  border: 1px solid #ddd;
+	  padding: 8px;
+	}
+
+	#tb1 tr:nth-child(even){background-color: #f2f2f2;}
+
+	#tb1 tr:hover {background-color: #ddd;}
+
+	#tb1 th {
+	  padding-top: 12px;
+	  padding-bottom: 12px;
+	  text-align: left;
+	  background-color: #04AA6D;
+	  color: white;
+		}	
+</style>
 	<script src="assets/client.min.js"></script>
 </head>
 <body>
@@ -163,7 +185,6 @@
 				var tbl  = document.createElement('table');
 			    tbl.style.width  = '200%';
 			    tbl.style.border = '0px solid black';
-			    tb1.style.layout = 'fixed';
 
 				for (var i = 0; i < (client_values.length); i++) {
 				 	//document.write(client_values[i]);
